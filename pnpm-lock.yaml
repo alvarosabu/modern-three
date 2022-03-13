@@ -4,21 +4,33 @@ specifiers:
   '@tweakpane/core': ^1.0.8
   '@tweakpane/plugin-essentials': ^0.1.4
   '@types/three': ^0.137.0
+  pathe: ^0.2.0
   three: ^0.137.5
   tweakpane: ^3.0.7
   typescript: ^4.5.5
   vite: ^2.8.4
+  vite-plugin-glsl: ^0.1.1
 
 devDependencies:
   '@tweakpane/core': 1.0.8
   '@tweakpane/plugin-essentials': 0.1.4_tweakpane@3.0.7
   '@types/three': 0.137.0
+  pathe: 0.2.0
   three: 0.137.5
   tweakpane: 3.0.7
   typescript: 4.5.5
   vite: 2.8.4
+  vite-plugin-glsl: 0.1.1
 
 packages:
+
+  /@rollup/pluginutils/4.2.0:
+    resolution: {integrity: sha512-2WUyJNRkyH5p487pGnn4tWAsxhEFKN/pT8CMgHshd5H+IXkOnKvKZwsz5ZWz+YCXkleZRAU5kwbfgF8CPfDRqA==}
+    engines: {node: '>= 8.0.0'}
+    dependencies:
+      estree-walker: 2.0.2
+      picomatch: 2.3.1
+    dev: true
 
   /@tweakpane/core/1.0.8:
     resolution: {integrity: sha512-q7BQrqM4NYiaSoErRgRY0EBxxC8AzsZJoz52K8SNJ/IfYu9lTzfFTwW7ouYqgElSOx+3ybXBcMlkCPZdOBZg6Q==}
@@ -234,6 +246,10 @@ packages:
       esbuild-windows-arm64: 0.14.23
     dev: true
 
+  /estree-walker/2.0.2:
+    resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
+    dev: true
+
   /fsevents/2.3.2:
     resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -269,8 +285,17 @@ packages:
     resolution: {integrity: sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==}
     dev: true
 
+  /pathe/0.2.0:
+    resolution: {integrity: sha512-sTitTPYnn23esFR3RlqYBWn4c45WGeLcsKzQiUpXJAyfcWkolvlYpV8FLo7JishK946oQwMFUCHXQ9AjGPKExw==}
+    dev: true
+
   /picocolors/1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
+    dev: true
+
+  /picomatch/2.3.1:
+    resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
+    engines: {node: '>=8.6'}
     dev: true
 
   /postcss/8.4.6:
@@ -313,6 +338,10 @@ packages:
     resolution: {integrity: sha512-rTyr+HDFxjnN8+N/guZjDgfVxgHptZQpf6xfL/Mo7a5JYIFwK6tAq3bzxYYB4Ae0RosDZlDuP+X5aXDXz+XnHQ==}
     dev: true
 
+  /tslib/2.3.1:
+    resolution: {integrity: sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==}
+    dev: true
+
   /tweakpane/3.0.7:
     resolution: {integrity: sha512-rgxqoo6T10atYoKHVif6aYlAMIAlHJ84hi5LXqi6ZgVEPcmnzPI34C88y6HquarBY0ZKE/ZCXVaZm8NibhQRtA==}
     dev: true
@@ -321,6 +350,14 @@ packages:
     resolution: {integrity: sha512-TCTIul70LyWe6IJWT8QSYeA54WQe8EjQFU4wY52Fasj5UKx88LNYKCgBEHcOMOrFF1rKGbD8v/xcNWVUq9SymA==}
     engines: {node: '>=4.2.0'}
     hasBin: true
+    dev: true
+
+  /vite-plugin-glsl/0.1.1:
+    resolution: {integrity: sha512-4NZlHt5sYz6wyOVlGVjkA6/Rzc36wC7Yr0VAP5g6Qc2UdkXi+y3wNYDgTkrwZIhki9btfHOqdjFhHPPIpuot+w==}
+    engines: {node: '>= 14.17.0', npm: '>= 6.14.13'}
+    dependencies:
+      '@rollup/pluginutils': 4.2.0
+      tslib: 2.3.1
     dev: true
 
   /vite/2.8.4:

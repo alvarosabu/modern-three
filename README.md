@@ -10,6 +10,7 @@
 - GUI controls using [Tweakpane](https://cocopon.github.io/tweakpane/) 🎛
 - Typescript 🦾
 - No classes, just functions 🎯
+- Shader support (glsl) with[vite-plugin-glsl](https://github.com/UstymUkhman/vite-plugin-glsl) 🎨
 
 ## You can help me keep working on this project 💚
 
