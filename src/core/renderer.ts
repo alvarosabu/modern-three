@@ -9,7 +9,6 @@ import {
 } from 'three'
 import { gui } from './gui'
 import { camera } from './camera'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 // Scene
 export const scene = new Scene()
@@ -62,11 +61,7 @@ window.addEventListener('resize', () => {
 scene.add(camera)
 updateRenderer()
 
-export const controls = new OrbitControls(camera, renderer.domElement)
-controls.enableDamping = true
-
 export default {
   renderer,
-  controls,
   gui,
 }

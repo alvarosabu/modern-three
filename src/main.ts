@@ -1,7 +1,8 @@
 import * as THREE from 'three'
-import { controls, renderer, scene } from './core/renderer'
+import { renderer, scene } from './core/renderer'
 import { fpsGraph, gui } from './core/gui'
 import camera from './core/camera'
+import { controls } from './core/orbit-control'
 
 import './style.css'
 
