@@ -4,6 +4,7 @@
     "useDefineForClassFields": true,
     "module": "ESNext",
     "lib": ["ESNext", "DOM"],
+    "types": ["vite/client", "node", "three", "tweakpane"],
     "moduleResolution": "Node",
     "strict": true,
     "sourceMap": true,

@@ -5,6 +5,10 @@ import camera from './core/camera'
 
 import './style.css'
 
+// Shaders
+import vertexShader from '/@/shaders/vertex.glsl'
+import fragmentShader from '/@/shaders/fragment.glsl'
+
 // Lights
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
 scene.add(ambientLight)
@@ -18,14 +22,39 @@ directionalLight.position.set(0.25, 2, 2.25)
 
 scene.add(directionalLight)
 
+const sphereMaterial = new THREE.ShaderMaterial({
+  uniforms: {
+    uTime: { value: 0 },
+    uFrequency: { value: new THREE.Vector2(20, 15) },
+  },
+  vertexShader,
+  fragmentShader,
+})
+
 const sphere = new THREE.Mesh(
   new THREE.SphereBufferGeometry(1, 32, 32),
-  new THREE.MeshToonMaterial({ color: 'teal' }),
+  sphereMaterial,
 )
 
 sphere.position.set(0, 2, 0)
 sphere.castShadow = true
 scene.add(sphere)
+
+const DirectionalLightFolder = gui.addFolder({
+  title: 'Directional Light',
+})
+
+Object.keys(directionalLight.position).forEach(key => {
+  DirectionalLightFolder.addInput(
+    directionalLight.position,
+    key as keyof THREE.Vector3,
+    {
+      min: -100,
+      max: 100,
+      step: 1,
+    },
+  )
+})
 
 const plane = new THREE.Mesh(
   new THREE.PlaneGeometry(10, 10, 10, 10),
@@ -44,10 +73,9 @@ const loop = () => {
 
   prevElapsedTime = elapsedTime
 
-  fpsGraph.begin()
+  sphereMaterial.uniforms.uTime.value = elapsedTime
 
-  sphere.rotation.y = elapsedTime * 0.6
-  sphere.rotation.z = elapsedTime * 0.3
+  fpsGraph.begin()
 
   controls.update()
   renderer.render(scene, camera)
