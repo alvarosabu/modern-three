@@ -8,8 +8,11 @@ import {
   Color,
 } from 'three'
 import { gui } from './gui'
-import { camera } from './camera'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+
+export const sizes = {
+  width: window.innerWidth,
+  height: window.innerHeight,
+}
 
 // Scene
 export const scene = new Scene()
@@ -40,11 +43,6 @@ gui.addInput(axesHelper, 'visible', {
   label: 'AxesHelper',
 })
 
-const sizes = {
-  width: window.innerWidth,
-  height: window.innerHeight,
-}
-
 function updateRenderer() {
   renderer.setSize(sizes.width, sizes.height)
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)) // To avoid performance problems on devices with higher pixel ratio
@@ -54,19 +52,11 @@ window.addEventListener('resize', () => {
   sizes.width = window.innerWidth
   sizes.height = window.innerHeight
   updateRenderer()
-
-  camera.aspect = sizes.width / sizes.height
-  camera.updateProjectionMatrix()
 })
 
-scene.add(camera)
 updateRenderer()
-
-export const controls = new OrbitControls(camera, renderer.domElement)
-controls.enableDamping = true
 
 export default {
   renderer,
-  controls,
   gui,
 }
