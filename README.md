@@ -2,7 +2,7 @@
 
 > Modern ThreeJS boilerplate powered by Vite & Typescript.
 
-![Modern ThreeJS](./public/modern-tree.png)
+![Modern ThreeJS](./public/modern-three.png)
 
 ## Features
 
