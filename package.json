@@ -4,6 +4,7 @@
   "description": "Modern ThreeJS boilerplate powered by Vite & Typescript.",
   "author": "Alvaro Saburido <hola@alvarosaburido.dev>",
   "license": "MIT",
+  "type": "module",
   "keywords": [
     "3d",
     "threejs",

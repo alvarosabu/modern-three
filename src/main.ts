@@ -33,7 +33,7 @@ const sphereMaterial = new THREE.ShaderMaterial({
 })
 
 const sphere = new THREE.Mesh(
-  new THREE.SphereBufferGeometry(1, 32, 32),
+  new THREE.SphereGeometry(1, 32, 32),
   sphereMaterial,
 )
 
@@ -67,12 +67,9 @@ plane.receiveShadow = true
 scene.add(plane)
 
 const clock = new THREE.Clock()
-let prevElapsedTime = 0
 
 const loop = () => {
   const elapsedTime = clock.getElapsedTime()
-
-  prevElapsedTime = elapsedTime
 
   sphereMaterial.uniforms.uTime.value = elapsedTime
 
