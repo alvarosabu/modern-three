@@ -8,3 +8,20 @@ body {
   top: 1rem;
   left: 1rem;
 }
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  color: #646464;
+  font-size: 0.8rem;
+}
+
+.footer a {
+  color: #6b84cc;
+  text-decoration: none;
+  margin: 0 0.25rem;
+}
