@@ -4,6 +4,8 @@
 
 ![Modern ThreeJS](./public/modern-three.png)
 
+Live demo [here](https://modern-three.alvarosaburido.dev/)
+
 ## Features
 
 - Powered with [Vite](https://vite.dev/) 📦
