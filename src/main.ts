@@ -6,10 +6,6 @@ import { controls } from './core/orbit-control'
 
 import './style.css'
 
-// Shaders
-import vertexShader from '/@/shaders/vertex.glsl'
-import fragmentShader from '/@/shaders/fragment.glsl'
-
 // Lights
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
 scene.add(ambientLight)
@@ -23,14 +19,7 @@ directionalLight.position.set(0.25, 2, 2.25)
 
 scene.add(directionalLight)
 
-const sphereMaterial = new THREE.ShaderMaterial({
-  uniforms: {
-    uTime: { value: 0 },
-    uFrequency: { value: new THREE.Vector2(20, 15) },
-  },
-  vertexShader,
-  fragmentShader,
-})
+const sphereMaterial = new THREE.MeshToonMaterial({ color: 'teal' })
 
 const sphere = new THREE.Mesh(
   new THREE.SphereGeometry(1, 32, 32),
@@ -66,13 +55,7 @@ plane.rotation.set(-Math.PI / 2, 0, 0)
 plane.receiveShadow = true
 scene.add(plane)
 
-const clock = new THREE.Clock()
-
 const loop = () => {
-  const elapsedTime = clock.getElapsedTime()
-
-  sphereMaterial.uniforms.uTime.value = elapsedTime
-
   fpsGraph.begin()
 
   controls.update()
