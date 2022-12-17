@@ -31,14 +31,14 @@
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
   },
   "devDependencies": {
-    "@tweakpane/core": "^1.1.0",
+    "@tweakpane/core": "^1.1.1",
     "@tweakpane/plugin-essentials": "^0.1.5",
-    "@types/three": "^0.144.0",
-    "pathe": "^0.3.5",
-    "three": "^0.144.0",
-    "tweakpane": "^3.1.0",
-    "typescript": "^4.8.2",
-    "vite": "^3.0.9",
-    "vite-plugin-glsl": "^0.3.0"
+    "@types/three": "^0.146.0",
+    "pathe": "^1.0.0",
+    "three": "^0.147.0",
+    "tweakpane": "^3.1.1",
+    "typescript": "^4.9.4",
+    "vite": "^4.0.1",
+    "vite-plugin-glsl": "^1.0.1"
   }
 }
