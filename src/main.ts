@@ -1,8 +1,8 @@
 import * as THREE from 'three'
-import { renderer, scene } from './core/renderer'
-import { fpsGraph, gui } from './core/gui'
-import camera from './core/camera'
-import { controls } from './core/orbit-control'
+import { renderer, scene } from '/@/core/renderer'
+import { fpsGraph, gui } from '/@/core/gui'
+import camera from '/@/core/camera'
+import { controls } from '/@/core/orbit-control'
 
 import './style.css'
 
@@ -46,7 +46,7 @@ const DirectionalLightFolder = gui.addFolder({
 })
 
 Object.keys(directionalLight.position).forEach(key => {
-  DirectionalLightFolder.addInput(
+  DirectionalLightFolder.addBinding(
     directionalLight.position,
     key as keyof THREE.Vector3,
     {
