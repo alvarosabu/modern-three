@@ -1,11 +1,10 @@
 import {
-  WebGLRenderer,
-  Scene,
-  AxesHelper,
-  sRGBEncoding,
-  PCFShadowMap,
   ACESFilmicToneMapping,
+  AxesHelper,
   Color,
+  PCFShadowMap,
+  Scene,
+  WebGLRenderer,
 } from 'three'
 import { gui } from './gui'
 
@@ -30,8 +29,7 @@ export const renderer = new WebGLRenderer({
 // More realistic shadows
 renderer.shadowMap.enabled = true
 renderer.shadowMap.type = PCFShadowMap
-renderer.physicallyCorrectLights = true
-renderer.outputEncoding = sRGBEncoding
+
 renderer.toneMapping = ACESFilmicToneMapping
 renderer.toneMappingExposure = 1
 
@@ -39,7 +37,7 @@ renderer.toneMappingExposure = 1
 const axesHelper = new AxesHelper()
 scene.add(axesHelper)
 
-gui.addInput(axesHelper, 'visible', {
+gui.addBinding(axesHelper, 'visible', {
   label: 'AxesHelper',
 })
 

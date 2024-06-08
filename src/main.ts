@@ -11,7 +11,7 @@ import vertexShader from '/@/shaders/vertex.glsl'
 import fragmentShader from '/@/shaders/fragment.glsl'
 
 // Lights
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
+const ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.5)
 scene.add(ambientLight)
 
 const directionalLight = new THREE.DirectionalLight('#ffffff', 1)
@@ -45,8 +45,8 @@ const DirectionalLightFolder = gui.addFolder({
   title: 'Directional Light',
 })
 
-Object.keys(directionalLight.position).forEach(key => {
-  DirectionalLightFolder.addInput(
+Object.keys(directionalLight.position).forEach((key) => {
+  DirectionalLightFolder.addBinding(
     directionalLight.position,
     key as keyof THREE.Vector3,
     {
