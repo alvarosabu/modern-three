@@ -1,9 +1,9 @@
 import type { Vector3 } from 'three'
-import { AmbientLight, Clock, DirectionalLight, Mesh, MeshToonMaterial, PlaneGeometry, ShaderMaterial, SphereGeometry, Vector2 } from 'three'
+import { AmbientLight, Clock, DirectionalLight, Mesh, MeshToonMaterial, PlaneGeometry, SphereGeometry, Vector2 } from 'three'
 // Shaders
 
-import { float, modelViewProjection, normalWorld, positionLocal, sin, time, uv, vec3, vec4 } from 'three/tsl'
-import { MeshStandardNodeMaterial } from 'three/webgpu'
+import { add, cos, modelViewProjection, mul, positionLocal, sin, uv, vec3 } from 'three/tsl'
+import { MeshStandardNodeMaterial, UniformNode } from 'three/webgpu'
 import camera from './core/camera'
 import { fpsGraph, gui } from './core/gui'
 
@@ -25,28 +25,25 @@ directionalLight.position.set(0.25, 2, 2.25)
 
 scene.add(directionalLight)
 
-// Time node: built-in uniform that increments every frame
-const t = time
-
 // Sine wave based on UV + time
 const uvNode = uv()
-const sineVal = sin(uvNode.x.add(t)) // sin(u + time)
-const normalizedSine = sineVal.mul(0.5).add(0.5) // shift from (-1..1) to (0..1)
 
-// Define two colors to blend
-const colorA = vec3(1.0, 0.0, 0.0) // red
-const colorB = vec3(0.0, 0.0, 1.0) // blue
-
-// Interpolate between colorA and colorB using normalizedSine
-const finalColor = colorA.mix(colorB, normalizedSine)
-
-// Create a vec4 with full opacity
-const fragmentColor = vec4(finalColor, float(1.0))
+const fragmentColor = uvNode
 
 // Vertex: displace along normal
-const sineValVert = sin(uvNode.x.add(t))
-const displacement = sineValVert.mul(0.1) // small amplitude
-const displacedPosition = positionLocal.add(normalWorld.mul(displacement))
+// Create uniforms as nodes
+const frequencyNode = new UniformNode(new Vector2(20.0, 5.0))
+const timeNode = new UniformNode(0.0)
+
+// Create the vertex transformations
+const posX = positionLocal.x
+const sinVal = sin(add(mul(posX, frequencyNode.value.y), mul(timeNode, -1)))
+const cosVal = cos(add(mul(posX, frequencyNode.value.x), mul(timeNode, -1)))
+
+const displacedPosition = positionLocal.add(
+  vec3(cosVal.mul(0.1), sinVal.mul(0.1), 0.0),
+)
+
 const vertexOutput = modelViewProjection(displacedPosition)
 
 // Create a NodeMaterial and assign the fragment color
@@ -96,6 +93,7 @@ const loop = () => {
   fpsGraph.begin()
 
   controls.update()
+  timeNode.value = elapsedTime
   renderer.render(scene, camera)
 
   fpsGraph.end()
