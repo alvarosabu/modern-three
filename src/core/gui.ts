@@ -1,7 +1,7 @@
-import type { BladeApi } from 'tweakpane'
-import { Pane } from 'tweakpane'
-import * as EssentialsPlugin from '@tweakpane/plugin-essentials'
 import type { BladeController, View } from '@tweakpane/core'
+import type { BladeApi } from 'tweakpane'
+import * as EssentialsPlugin from '@tweakpane/plugin-essentials'
+import { Pane } from 'tweakpane'
 
 interface FPSGraph extends BladeApi<BladeController<View>> {
   begin: () => void
