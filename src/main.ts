@@ -32,7 +32,7 @@ const fragmentColor = uvNode
 
 // Vertex: displace along normal
 // Create uniforms as nodes
-const frequencyNode = new UniformNode(new Vector2(20.0, 5.0))
+const frequencyNode = new UniformNode(new Vector2(40.0, 10.0))
 const timeNode = new UniformNode(0.0)
 
 // Create the vertex transformations
@@ -41,7 +41,7 @@ const sinVal = sin(add(mul(posX, frequencyNode.value.y), mul(timeNode, -1)))
 const cosVal = cos(add(mul(posX, frequencyNode.value.x), mul(timeNode, -1)))
 
 const displacedPosition = positionLocal.add(
-  vec3(cosVal.mul(0.1), sinVal.mul(0.1), 0.0),
+  vec3(cosVal.mul(0.05), sinVal.mul(0.05), 0.0),
 )
 
 const vertexOutput = modelViewProjection(displacedPosition)
