@@ -4,12 +4,12 @@
     "lib": ["ESNext", "DOM"],
     "useDefineForClassFields": true,
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "paths": {
       "/@/*": ["./src/*"]
     },
     "resolveJsonModule": true,
-    "types": ["vite/client", "three", "tweakpane"],
+    "types": ["vite/client", "three", "tweakpane", "three/tsl", "three/webgpu"],
     "strict": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
