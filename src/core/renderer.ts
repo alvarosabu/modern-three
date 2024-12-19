@@ -17,7 +17,7 @@ export const sizes = {
 export const scene = new Scene()
 scene.background = new Color('#333')
 
-const canvas: HTMLElement = document.querySelector('#webgl') as HTMLElement
+const canvas: HTMLCanvasElement = document.querySelector('#webgl') as HTMLCanvasElement
 
 // Renderer
 export const renderer = new WebGLRenderer({
