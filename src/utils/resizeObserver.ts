@@ -1,6 +1,6 @@
 export type ResizeCallback = (width: number, height: number) => void
 export interface ResizeObserver {
-  getSize: () => { width: number, height: number }
+  getSize: () => { width: number; height: number }
   onResize: (cb: ResizeCallback) => () => void
 }
 
@@ -14,7 +14,7 @@ export const createResizeObserver = () => {
 
   window.addEventListener('resize', () => {
     const { width, height } = getSize()
-    callbacks.forEach(cb => cb(width, height))
+    callbacks.forEach((cb) => cb(width, height))
   })
 
   return {
