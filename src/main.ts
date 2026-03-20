@@ -1,18 +1,33 @@
-import type { Vector3 } from 'three'
-import { AmbientLight, Clock, DirectionalLight, Mesh, MeshToonMaterial, PlaneGeometry, ShaderMaterial, SphereGeometry, Vector2 } from 'three'
-import camera from './core/camera'
-import { fpsGraph, gui } from './core/gui'
-import { controls } from './core/orbit-control'
-import { renderer, scene } from './core/renderer'
+import { AmbientLight, DirectionalLight, Mesh, MeshNormalMaterial, MeshToonMaterial, PerspectiveCamera, PlaneGeometry, SphereGeometry, Timer, TorusGeometry } from 'three'
+import { createCamera } from './core/createCamera'
+import { createControls } from './core/createControls'
+import { createGUI } from './core/createGUI'
+import { createRenderer } from './core/createRenderer'
+import { createScene } from './core/createScene'
+import { createResizeObserver } from './utils/resizeObserver'
 
-import './style.css'
+const canvas = document.querySelector<HTMLCanvasElement>('#webgl')
+if (!canvas) {
+  throw new Error('Canvas #webgl not found')
+}
 
-import fragmentShader from '/@/shaders/fragment.glsl'
-// Shaders
-import vertexShader from '/@/shaders/vertex.glsl'
+const resizeObserver = createResizeObserver()
 
-// Lights
-const ambientLight = new AmbientLight(0xFFFFFF, 0.5)
+const { scene } = createScene({ clearColor: '#333' })
+
+const { renderer, dispose: disposeRenderer } = createRenderer({
+  canvas,
+  resizeObserver,
+  scene,
+})
+
+const { camera, dispose: disposeCamera } = createCamera({ resizeObserver })
+scene.add(camera)
+
+createControls(camera, renderer.domElement)
+
+// Main scene
+const ambientLight = new AmbientLight('#ffffff', 0.5)
 scene.add(ambientLight)
 
 const directionalLight = new DirectionalLight('#ffffff', 1)
@@ -24,39 +39,15 @@ directionalLight.position.set(0.25, 2, 2.25)
 
 scene.add(directionalLight)
 
-const sphereMaterial = new ShaderMaterial({
-  uniforms: {
-    uTime: { value: 0 },
-    uFrequency: { value: new Vector2(20, 15) },
-  },
-  vertexShader,
-  fragmentShader,
-})
-
-const sphere = new Mesh(
-  new SphereGeometry(1, 32, 32),
-  sphereMaterial,
+const donut = new Mesh(
+  new TorusGeometry(1, 0.4, 16, 64),
+  new MeshNormalMaterial(),
 )
 
-sphere.position.set(0, 2, 0)
-sphere.castShadow = true
-scene.add(sphere)
-
-const DirectionalLightFolder = gui.addFolder({
-  title: 'Directional Light',
-})
-
-Object.keys(directionalLight.position).forEach((key) => {
-  DirectionalLightFolder.addBinding(
-    directionalLight.position,
-    key as keyof Vector3,
-    {
-      min: -100,
-      max: 100,
-      step: 1,
-    },
-  )
-})
+donut.position.set(0, 2, 0)
+donut.rotation.set(-Math.PI / 3, Math.PI / 9, Math.PI / 2)
+donut.castShadow = true
+scene.add(donut)
 
 const plane = new Mesh(
   new PlaneGeometry(10, 10, 10, 10),
@@ -67,20 +58,33 @@ plane.rotation.set(-Math.PI / 2, 0, 0)
 plane.receiveShadow = true
 scene.add(plane)
 
-const clock = new Clock()
+// GUI
+const { pane, fpsGraph, dispose: disposeGUI } = createGUI()
+pane.addBinding(camera.position, 'x', { min: -10, max: 10, step: 0.01 })
+pane.addBinding(camera.position, 'y', { min: -10, max: 10, step: 0.01 })
+pane.addBinding(camera.position, 'z', { min: -10, max: 10, step: 0.01 })
+
+// Animation loop
+const timer = new Timer()
 
 const loop = () => {
-  const elapsedTime = clock.getElapsedTime()
-
-  sphereMaterial.uniforms.uTime.value = elapsedTime
-
+  // const elapsed = clock.getElapsedTime()
   fpsGraph.begin()
-
-  controls.update()
+  timer.update()
+  const delta = timer.getDelta()
+  donut.rotation.y += delta
   renderer.render(scene, camera)
-
   fpsGraph.end()
   requestAnimationFrame(loop)
 }
 
 loop()
+
+// Optional: cleanup on HMR
+if (import.meta.hot) {
+  import.meta.hot.dispose(() => {
+    disposeRenderer()
+    disposeCamera()
+    disposeGUI()
+  })
+}
