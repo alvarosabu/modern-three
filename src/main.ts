@@ -1,4 +1,13 @@
-import { AmbientLight, DirectionalLight, Mesh, MeshNormalMaterial, MeshToonMaterial, PerspectiveCamera, PlaneGeometry, SphereGeometry, Timer, TorusGeometry } from 'three'
+import {
+  AmbientLight,
+  DirectionalLight,
+  Mesh,
+  MeshNormalMaterial,
+  MeshToonMaterial,
+  PlaneGeometry,
+  Timer,
+  TorusGeometry,
+} from 'three'
 import { createCamera } from './core/createCamera'
 import { createControls } from './core/createControls'
 import { createGUI } from './core/createGUI'
@@ -39,20 +48,14 @@ directionalLight.position.set(0.25, 2, 2.25)
 
 scene.add(directionalLight)
 
-const donut = new Mesh(
-  new TorusGeometry(1, 0.4, 16, 64),
-  new MeshNormalMaterial(),
-)
+const donut = new Mesh(new TorusGeometry(1, 0.4, 16, 64), new MeshNormalMaterial())
 
 donut.position.set(0, 2, 0)
 donut.rotation.set(-Math.PI / 3, Math.PI / 9, Math.PI / 2)
 donut.castShadow = true
 scene.add(donut)
 
-const plane = new Mesh(
-  new PlaneGeometry(10, 10, 10, 10),
-  new MeshToonMaterial({ color: '#444' }),
-)
+const plane = new Mesh(new PlaneGeometry(10, 10, 10, 10), new MeshToonMaterial({ color: '#444' }))
 
 plane.rotation.set(-Math.PI / 2, 0, 0)
 plane.receiveShadow = true
