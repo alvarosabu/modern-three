@@ -1,18 +1,19 @@
 # Modern ThreeJS ⚡️
 
-> Modern ThreeJS boilerplate powered by Vite & Typescript.
+> Modern ThreeJS boilerplate powered by Vite+ & Typescript.
 
-![Modern ThreeJS](./public/modern-three.png)
+![Modern ThreeJS](./public/banner.png)
 
 Live demo [here](https://modern-three.alvarosaburido.dev/)
 
 ## Features
 
-- Powered with [Vite](https://vite.dev/) 📦
+- Powered with [Vite+](https://vite.dev/) 📦
 - GUI controls using [Tweakpane](https://cocopon.github.io/tweakpane/) 🎛
 - Typescript 🦾
 - No classes, just factories 🎯
-- Shader support (glsl) with[vite-plugin-glsl](https://github.com/UstymUkhman/vite-plugin-glsl) 🎨
+- Shader support (glsl) with [vite-plugin-glsl](https://github.com/UstymUkhman/vite-plugin-glsl) 🎨
+- Optimized production build — `three` and `tweakpane` split into separate vendor chunks for better caching
 
 ## You can help me keep working on this project 💚
 
@@ -31,27 +32,18 @@ cd my-awesome-three
 pnpm i # If you don't have pnpm installed, run: npm install -g pnpm
 ```
 
-### Project setup
-
 ### Use it
 
-```
+```bash
 pnpm dev
 ```
 
-This will serve the app at [http://localhost:3000](http://localhost:3000)
+This will serve the app at [http://localhost:5173](http://localhost:5173)
 
 ### Build it
 
-```
+```bash
 pnpm build
 ```
 
-Builds the app for production to the `dist` folder.<br>
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](#deployment) for more information.
-
-![repository-banner.png](https://res.cloudinary.com/alvarosaburido/image/upload/v1612193118/as-portfolio/Repo_Banner_kexozw.png)
+Builds the app for production to the `dist` folder. The build is minified, filenames include hashes, and vendor libraries (`three`, `tweakpane`) are split into separate chunks for efficient browser caching.
